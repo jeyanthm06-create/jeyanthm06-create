@@ -2,6 +2,9 @@
    <p align="center">
      <img src="koi/koi.gif" width="640" alt="My koi" />
    </p>
+      <p align="center">
+     <sub>🐟 This koi is generated from my GitHub activity and redrawn daily. Its colors come from the languages I use, and it grows as my contributions grow. Made with <a href="https://github.com/yalongwastaken/git-koi">git-koi</a> by Anthony Yalong.</sub>
+   </p>
 <!--
 **jeyanthm06-create/jeyanthm06-create** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
