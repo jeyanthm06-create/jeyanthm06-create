@@ -1,6 +1,6 @@
 ## Hi there 👋
    <p align="center">
-     <img src="koi/koi.gif" width="256" alt="My koi" />
+     <img src="koi/koi.gif" width="640" alt="My koi" />
    </p>
 <!--
 **jeyanthm06-create/jeyanthm06-create** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
