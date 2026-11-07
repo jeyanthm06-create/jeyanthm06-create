@@ -15,13 +15,36 @@
    jobs:
      koi:
        runs-on: ubuntu-latest
-       timeout-minutes: 10
+       timeout-minutes: 20
        steps:
-         - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-         - uses: yalongwastaken/git-koi@7305e9b1fadee6f43d3b4fa543a25d4cde79856e # v1.0.2
+         - name: Check out the profile repo
+           uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+         - name: Check out the pinned git-koi fork
+           uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
            with:
-             body: white
-             output-dir: koi
+             repository: jeyanthm06-create/git-koi
+             ref: 81a719e99e8c34eb26dd72bb8067b547b5a55420
+             path: koi-src
+             persist-credentials: false
+
+         - name: Build git-koi from the fork
+           run: |
+             rustup update stable
+             rustc --version
+             cargo build --release --locked --manifest-path koi-src/Cargo.toml
+
+         - name: Collect the account snapshot
+           env:
+             GH_TOKEN: ${{ github.token }}
+             KOI_LOGIN: ${{ github.repository_owner }}
+           run: |
+             ./koi-src/target/release/git-koi collect "$KOI_LOGIN" --output "$RUNNER_TEMP/koi-snapshot.json"
+
+         - name: Render the koi
+           run: |
+             ./koi-src/target/release/git-koi render "$RUNNER_TEMP/koi-snapshot.json" --output-dir koi --body white
+
          - name: Commit the koi if it changed
            shell: bash
            run: |
